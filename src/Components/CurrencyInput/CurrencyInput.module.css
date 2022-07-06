@@ -1,0 +1,38 @@
+.wrapper {
+    /* display: flex; */
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    /* background-color: #ccffaa; */
+}
+
+.input-value {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    transition: border 300ms;
+}
+
+.input-value:hover,
+:focus {
+    border: solid 2px #0000ff;
+}
+
+.currency-list--latests {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    /* margin-bottom: 15px; */
+    list-style: none;
+}
+
+.currency-list--latests>li {
+    cursor: pointer;
+}

@@ -1,0 +1,15 @@
+.list {
+    font-size: 26px;
+    font-weight: 500;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    list-style: none;
+}
