@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react"
 import { currencies } from "../../Currencies/currencies"
 import styles from './CurrencyDataList.module.css'
+import PropTypes from 'prop-types'
 
 export default function CurrencyDataList({ handlerOnClick, handleOnClose, autofocus = false }) {
     const [filter, setFilter] = useState('');
@@ -61,4 +62,10 @@ export default function CurrencyDataList({ handlerOnClick, handleOnClose, autofo
             </ul>
         </div>
     )
+}
+
+CurrencyDataList.propTypes = {
+    handlerOnClick: PropTypes.func.isRequired,
+    handleOnClose: PropTypes.func.isRequired,
+    autofocus: PropTypes.bool
 }
