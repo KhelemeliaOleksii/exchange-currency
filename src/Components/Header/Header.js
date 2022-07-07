@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import currencyExchangeApi from '../../APIs/currencyApi';
+// import currencyExchangeApi from '../../APIs/currencyApi';
 import { currencies } from '../../Currencies/currencies';
 import Section from '../Section'
 import styles from './Header.module.css'
