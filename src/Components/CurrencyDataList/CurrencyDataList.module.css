@@ -1,0 +1,34 @@
+.input-list {
+    padding: 5px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    list-style: none;
+    opacity: 1;
+    z-index: 100;
+    border: solid 1px rgba(0, 0, 0, 0.4)
+}
+
+.input-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+}
+
+.input-option:hover,
+.input-option:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.input-option:not(:last-of-type) {
+    margin-bottom: 5px;
+}
+
+.flag-wrapper,
+.label {
+    padding-right: 10px;
+}

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react"
 import { currencies } from "../../Currencies/currencies"
+import styles from './CurrencyDataList.module.css'
 
 export default function CurrencyDataList({ handlerOnClick, handleOnClose, autofocus = false }) {
     const [filter, setFilter] = useState('');
@@ -27,36 +28,37 @@ export default function CurrencyDataList({ handlerOnClick, handleOnClose, autofo
     }
 
     return (
-        <>
+        <div className={styles.wrapper}>
             <input
                 type="text"
                 name="currency"
                 value={filter}
                 onChange={handlerOnChange}
                 autoFocus={autofocus}
+                className={styles['input-filter']}
             />
             {
 
             }
-            <ul>
+            <ul className={styles['input-list']}>
                 {
                     currencyList.map(item => (
                         <li key={item.id}
                             onClick={() => handlerOnClick(item.id)}
+                            className={styles["input-option"]}
                         >
-                            <div className="flag">
+                            <div className={styles['flag-wrapper']}>
                                 <img
                                     src={`https://flagcdn.com/${item.imgCode}.svg`}
                                     width="30"
                                     alt="European Union" />
                             </div>
-                            <div className="currency-label">{item.label}</div>
-                            <div className="currency-label">{item.name}</div>
-
+                            <div className={styles["label"]}>{item.label}</div>
+                            <div className={styles["name"]}>{item.name}</div>
                         </li>
                     ))
                 }
             </ul>
-        </>
+        </div>
     )
 }

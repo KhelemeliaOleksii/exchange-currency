@@ -2,47 +2,61 @@ import { useState } from "react";
 import CurrencyTypeInput from "../CurrencyTypeInput";
 import styles from './CurrencyInput.module.css';
 import PropTypes from 'prop-types';
+import { useEffect } from "react";
 
 export default function CurrencyInput(props) {
-    const { onChangeCurrency,
+    const {
+        onChangeCurrency,
         onChangeAmount,
         currencyLabel,
         currencyAmount,
         currencyList,
-        order } = props
+        order,
+    } = props
 
-    const [currency, setCurrency] = useState('UAH');
     const [lastCurrencies, setLastCurrencies] = useState(['USD', 'EUR', 'PLN']);
-    const [amount, setAmount] = useState(currencyAmount);
 
-    const onClickLatests = ({ target }) => {
-        const value = target.dataset.name;
-        const reduced = lastCurrencies.filter(item => item !== value);
+    const configureLasts = (value, order) => {
+        const current = lastCurrencies.find(item => item === value);
+        if (!!current) {
+            const reduced = lastCurrencies.filter(item => item !== value);
 
-        if (reduced.length === 0) return;
+            if (reduced.length === 0) return;
 
-        setLastCurrencies([value, ...reduced]);
-
-        setCurrency(value);
-        // console.log("value", value, "order", order);
+            setLastCurrencies([value, ...reduced]);
+        } else {
+            const copy = [...lastCurrencies];
+            copy.pop();
+            setLastCurrencies([value, ...copy]);
+        }
         onChangeCurrency(value, order);
     }
+    const onClickLasts = ({ target }) => {
+        const value = target.dataset.name;
+        configureLasts(value, order);
+    }
     const handlerOnChange = ({ target: { value } }) => {
-        setAmount(value);
-        onChangeAmount(value, order);
+        onChangeAmount(Number(value), order);
     }
     return (
         <div className={styles.wrapper}>
-            <CurrencyTypeInput currencyLabel={currency} />
+            <CurrencyTypeInput
+                currencyLabel={currencyLabel}
+                currencyList={currencyList}
+                onChangeCurrency={configureLasts}
+                order={order}
+            />
+
             <input
                 className={styles['input-value']}
                 type='number'
-                value={amount}
+                value={currencyAmount}
                 onChange={handlerOnChange} />
+
             <ul className={styles['currency-list--latests']}>
                 {
                     lastCurrencies.map(item => (
-                        <li key={item} data-name={item} onClick={onClickLatests}>
+                        <li key={item} data-name={item} onClick={onClickLasts}>
                             {item}
                         </li>
                     ))

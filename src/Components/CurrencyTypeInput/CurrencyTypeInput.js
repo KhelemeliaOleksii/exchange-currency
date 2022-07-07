@@ -1,4 +1,3 @@
-import { currencies } from "../../Currencies/currencies"
 import {
     IoMdArrowDropup,
     IoMdSearch,
@@ -7,15 +6,22 @@ import {
 import { useCallback, useState } from "react";
 import CurrencyDataList from "../CurrencyDataList/CurrencyDataList";
 import { useEffect } from "react";
-import styles from './CurrencyTypeInput.module.css'
-export default function CurrencyTypeInput({ handlerOnCurrencyInput, currencyLabel = 'UAH' }) {
+import styles from './CurrencyTypeInput.module.css';
+import PropTypes from 'prop-types';
 
+export default function CurrencyTypeInput(props) {
+    const {
+        currencyLabel,
+        currencyList,
+        onChangeCurrency,
+        order,
+    } = props;
     const [currency, setCurrency] = useState(currencyLabel);
     const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 
 
     useEffect(() => {
-        const initialCurrency = currencies.find(item => item.label === currencyLabel);
+        const initialCurrency = currencyList.find(item => item.label === currencyLabel);
         setCurrency(initialCurrency);
     }, [currencyLabel]);
 
@@ -26,8 +32,10 @@ export default function CurrencyTypeInput({ handlerOnCurrencyInput, currencyLabe
         setIsChangeCurrency(false);
     }
     const handlerChooseItem = (id) => {
-        setCurrency(currencies.find((item) => item.id === Number(id)));
+        const currencyById = currencyList.find((item) => item.id === Number(id));
+        setCurrency(currencyById);
         setIsChangeCurrency(false);
+        onChangeCurrency(currencyById.label, order);
     }
     const handleOnCloseList = useCallback(() => {
         setIsChangeCurrency(false);
@@ -61,4 +69,17 @@ export default function CurrencyTypeInput({ handlerOnCurrencyInput, currencyLabe
             )}
         </div>
     )
+}
+
+CurrencyTypeInput.propTypes = {
+    currencyLabel: PropTypes.string.isRequired,
+    currencyList: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            imgCode: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+        })).isRequired,
+    onChangeCurrency: PropTypes.func.isRequired,
+    order: PropTypes.string.isRequired,
 }
