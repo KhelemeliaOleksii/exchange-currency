@@ -5,11 +5,6 @@ import styles from './ExchangeCurrencyForm.module.css';
 import { useState } from "react";
 import { useEffect } from "react";
 import { currencies } from "../../Currencies/currencies";
-import { useCallback } from "react";
-
-function calcEndingAmount(initialAmount, rate = 0.1) {
-    return initialAmount * rate;
-}
 
 export default function ExchangeCurrencyForm() {
     const [rates, setRates] = useState([]);
@@ -92,6 +87,16 @@ export default function ExchangeCurrencyForm() {
                 return;
         }
     }
+    const handlerOnClickSwap = () => {
+        const tmpCurrencyType1 = currencyFirst;
+        const tmpCurrencyType2 = currencySecond;
+        setCurrencyFirst(tmpCurrencyType2);
+        setCurrencySecond(tmpCurrencyType1);
+        const tmpCurrencyAmount1 = amountFirst;
+        const tmpCurrencyAmount2 = amountSecond;
+        setAmountFirst(tmpCurrencyAmount2);
+        setAmountSecond(tmpCurrencyAmount1);
+    }
     return (
         <Section>
             <form className={styles.form}>
@@ -104,7 +109,9 @@ export default function ExchangeCurrencyForm() {
                     order={'first'}
                     initial={'UAH'}
                 />
-                <IoMdSwap size={30} />
+                <button type="button" className={styles["button-swap"]} onClick={handlerOnClickSwap}>
+                    <IoMdSwap size={30} />
+                </button>
                 <CurrencyInput
                     onChangeCurrency={handlerOnChangeCurrency}
                     onChangeAmount={handlerOnChangeAmount}

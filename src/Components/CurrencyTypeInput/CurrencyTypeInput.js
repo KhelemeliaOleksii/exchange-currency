@@ -23,7 +23,7 @@ export default function CurrencyTypeInput(props) {
     useEffect(() => {
         const initialCurrency = currencyList.find(item => item.label === currencyLabel);
         setCurrency(initialCurrency);
-    }, [currencyLabel]);
+    }, [currencyLabel, currencyList]);
 
     const handlerOnClickDropDown = () => {
         setIsChangeCurrency(true);

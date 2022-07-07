@@ -37,14 +37,15 @@ export default function Header() {
         <Section>
             <ul className={styles.list}>
                 {rates.map(item => (
-                    <li key={item.label}>
-                        <span>{item.label}</span>
-                        <span> <img
-                            src={`https://flagcdn.com/${defineCurrency(item.label).imgCode}.svg`}
-                            width="30"
-                            alt={item.label} />
+                    <li key={item.label} className={styles.item}>
+                        <span className={styles.label}>{item.label}</span>
+                        <span className={styles["img-wrapper"]}>
+                            <img
+                                src={`https://flagcdn.com/${defineCurrency(item.label).imgCode}.svg`}
+                                width="30"
+                                alt={item.label} />
                         </span>
-                        <span>{converter(item.rate, 100)}</span>
+                        <span className={styles.amount}>{converter(item.rate, 100)}</span>
                     </li>
                 ))
                 }

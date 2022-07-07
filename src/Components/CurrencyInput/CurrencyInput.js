@@ -2,7 +2,6 @@ import { useState } from "react";
 import CurrencyTypeInput from "../CurrencyTypeInput";
 import styles from './CurrencyInput.module.css';
 import PropTypes from 'prop-types';
-import { useEffect } from "react";
 
 export default function CurrencyInput(props) {
     const {
